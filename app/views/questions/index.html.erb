@@ -1,0 +1,136 @@
+<%- model_class = Question -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:difficulty) %></th>
+      <th><%= model_class.human_attribute_name(:visible) %></th>
+      <th><%= model_class.human_attribute_name(:locked) %></th>
+      <th><%= model_class.human_attribute_name(:position) %></th>
+      <th><%= model_class.human_attribute_name(:content) %></th>
+      <th><%= model_class.human_attribute_name(:value) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:question_set_id) %></th>
+      <th><%= model_class.human_attribute_name(:pictures) %></th>
+      <th><%= model_class.human_attribute_name(:distractors) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions"), :colspan => 2 %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= link_to question.id, question_path(question) %></td>
+        <td><div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="<%= (question.difficulty)*100 %>"
+              aria-valuemin="0" aria-valuemax="100" style="width:<%= (question.difficulty)*100 %>%">
+              <%= question.difficulty  %>
+              </div>
+            </div>
+        </td>
+        <td><%= question.visible ?  icon(:'eye-open') : glyph(:'eye-close') %></td>
+        <td><%= question.locked ?  glyph(:lock) : glyph(:edit) %></td>
+        <td><%= question.position %></td>
+        <td><%= question.content.truncate 50 %></td>
+        <td><%= question.value %></td>
+        <td><%=l question.created_at %></td>
+        <% if(question.question_set_id) %>
+          <% question_set = QuestionSet.find(question.question_set_id) %>
+          <td>
+            <%= tag_label((content_tag :a, "#{question_set.id}", href: "#question_set_#{question_set.id}", data: {toggle: 'modal'}), :default) %>
+          </td>
+          
+        <% else %>
+        <td>No asociated to any question set</td>
+        <% end %>
+        <td>
+          <%= tag_label((content_tag :a, "#{question.pictures.count} #{ 'Picture'.pluralize(question.pictures.count)}", href: "#question_picture#{question.id}", data: {toggle: 'modal'}), :default) %>
+        </td>
+
+        <!-- Modal for pictures -->
+        <div id="<%= "question_picture#{question.id}" %>" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><%= "#{question.pictures.count} #{ 'Picture'.pluralize(question.pictures.count)}" %></h4>
+              </div>
+              <!-- Modal body -->
+              <div class="modal-body" style="overflow">
+                <div class="row">
+                  <% question.pictures.each do |picture| %>
+                  <div class="col-xs-6 col-md-3">
+                    <div class="row">
+                           <div class="col-md-3 ">
+                              <%= link_to picture.description, picture_path(picture) %>
+                           </div>
+                    </div>
+                    <%= link_to (image_tag picture.file_name.thumb.url.to_s), picture_path(picture), class: "thumbnail" %>
+                  </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end modal -->
+        <td>
+          <%= tag_label((content_tag :a, "#{question.distractors.count} #{ 'Distractor'.pluralize(question.distractors.count)}", href: "#question_distractor#{question.id}", data: {toggle: 'modal'}), :default) %>
+        </td>
+        <!-- Modal for distractors -->
+        <div id="<%= "question_distractor#{question.id}" %>" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><%= "#{question.distractors.count} #{ 'Distractor'.pluralize(question.distractors.count)}" %></h4>
+              </div>
+              <!-- Modal body -->
+              <div class="modal-body" style="overflow">
+                <div class="row">
+                  <% question.distractors.each do |distractor| %>
+                  <div class="col-xs-6 col-md-3">
+                    <div class="row">
+                     <div class="col-md-6 ">
+                      <%= link_to distractor.content, distractor_path(distractor) %>
+                     </div>
+                    </div>
+                    <div class="row">
+                           <div class="col-md-10 col-lg-10">
+                                <%= distractor.right ? tag_label(glyph(:sunglasses), :success)  : tag_label(' ', :danger) %>
+                           </div>
+
+                    </div>
+                  </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end modal -->
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_question_path(question), :class => 'btn btn-default btn-xs' %>
+        </td>
+        <td>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      question_path(question),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_question_path,
+            :class => 'btn btn-primary' %>

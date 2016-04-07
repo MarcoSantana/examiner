@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <div class="form-group">
+      <%= f.label :difficulty, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= f.number_field :difficulty, :class => 'form-control', min: 0, max: 1.0, step: 0.1 %>
+      </div>
+      <div class="col-lg-2">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="<%= (@question.difficulty)*100 %>"
+            aria-valuemin="0" aria-valuemax="100" style="width:<%= (@question.difficulty)*100 %>%">
+            <%= @question.difficulty  %>
+          </div>
+        </div>
+      </div>
+      <%=f.error_span(:difficulty) %>
+    </div>
+  </div>
+  <div class="col-xs-2 col-sm-2 col-md-3 col-lg-2">
+    <div class="form-group">
+      <%= f.label :visible, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= f.text_field :visible, :class => 'form-control' %>
+      </div>
+      <%=f.error_span(:visible) %>
+    </div>
+  </div>
+  <div class="col-xs-2 col-sm-3 col-md-2 col-lg-2">
+    <div class="form-group">
+      <%= f.label :locked, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= f.text_field :locked, :class => 'form-control' %>
+      </div>
+      <%=f.error_span(:locked) %>
+    </div>
+  </div>
+  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+    <div class="form-group">
+      <%= f.label :position, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= f.text_field :position, :class => 'form-control' %>
+      </div>
+      <%=f.error_span(:position) %>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,39 @@
+<div class="panel-body">
+  <div class="row">
+    <div class="col-xs-2 col-sm-2 col-md-3 col-lg-2">
+      <div class="form-group">
+        <%= f.label :visible, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= f.text_field :visible, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:visible) %>
+      </div>
+    </div>
+    <div class="col-xs-2 col-sm-3 col-md-2 col-lg-2">
+      <div class="form-group">
+        <%= f.label :locked, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= f.text_field :locked, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:locked) %>
+      </div>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <div class="form-group">
+        <%= f.label :position, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= f.text_field :position, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:position) %>
+      </div>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <div class="form-group">
+        <%= f.label :right, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= f.check_box :right, :class => 'form-control' %>
+        </div>
+        <%=f.error_span(:position) %>
+      </div>
+    </div>
+  </div>

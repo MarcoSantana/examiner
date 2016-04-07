@@ -1,0 +1,41 @@
+<div class="panel-body">
+  <% @question_set.questions.each do |question| -%>
+  <div class="form-group">
+    <%= f.fields_for :questions, question do |q| -%>
+    <%= f.label "Question", "id:#{question.id}", :class => 'control-label col-lg-2' %>
+    <div class="row">
+      <div class="col-md-8" style="padding-right:20px; border-right: 1px solid #ccc;">
+        <%= q.text_area :content, :class => 'form-control', :rows => 3 %>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-6">
+            <%= q.label :_destroy, 'Remove question' %>
+          </div>
+          <div class="col-md-6">
+            <%= q.check_box :_destroy %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <%= q.label :difficulty, :class => 'control-label' %>
+          </div>
+          <div class="col-md-6">
+            <%= q.number_field :difficulty, :class => 'form-control', min: 0, max: 1.0, step: 0.1 %>
+          </div>
+        </div>
+        <div class='row'>
+          <div class="col-md-6">
+            <%= q.label :visible, :class => 'control-label' %>
+          </div>
+          <div class="col-md-6">
+            <%= q.check_box :visible, :class => 'form-control' %>
+          </div>
+          <%=q.error_span(:visible) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<% end %>

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  question_id:
+  size: 1
+  format: MyString
+  additional_code: MyText
+  description: MyString
+  in_line: false
+  locked: true
+  visible: false
+
+two:
+  user_id: 1
+  question_id:
+  size: 1
+  format: MyString
+  additional_code: MyText
+  description: MyString
+  in_line: false
+  locked: true
+  visible: false

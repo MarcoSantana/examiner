@@ -1,0 +1,39 @@
+<%= form_for @question_set, :html => { :class => "form-vertical question_set" } do |f| %>
+
+<% if @question_set.errors.any? %>
+<div id="error_expl" class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= pluralize(@question_set.errors.count, "error") %> prohibited this question_set from being saved:</h3>
+  </div>
+  <div class="panel-body">
+    <ul>
+      <% @question_set.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<% end %>
+<div class="panel-heading">Question Set</div>
+<div class="panel-body">
+<%= render :partial => 'question_sets/question_set_stats', :locals => {:f => f} %>
+  <div class="form-group">
+    <%= f.label :content, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_area :content, :class => 'form-control', :rows => 3 %>
+    </div>
+    <%=f.error_span(:content) %>
+  </div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">Questions</div>
+<%= render :partial => 'question_sets/questions_form', :locals => {:f => f} %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+      question_sets_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+  <% end %>
