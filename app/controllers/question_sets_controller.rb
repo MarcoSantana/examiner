@@ -12,7 +12,7 @@ class QuestionSetsController < ApplicationController
   def new
     @question_set = QuestionSet.new()
     @questions = @question_set.questions.build
-    10.times { @question_set.questions.build }
+    1.times { @question_set.questions.build }
   end
   # POST /question_sets
   # POST /question_sets.json

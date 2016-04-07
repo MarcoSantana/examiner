@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   resources :answers
   resources :pictures
   resources :questions
-  resources :question_sets
+  resources :question_sets do
+    resources :questions do
+      resources :distractors
+    end
+  end
   resources :quizzes
   resources :users
   resources :subjects

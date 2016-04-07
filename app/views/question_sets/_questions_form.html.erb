@@ -1,7 +1,7 @@
 <div class="panel-body">
-  <% @question_set.questions.each do |question| -%>
+  <% @question_set.questions.each do |question| %>
   <div class="form-group">
-    <%= f.fields_for :questions, question do |q| -%>
+    <%= f.fields_for :questions, question do |q| %>
     <%= f.label "Question", "id:#{question.id}", :class => 'control-label col-lg-2' %>
     <div class="row">
       <div class="col-md-8" style="padding-right:20px; border-right: 1px solid #ccc;">
@@ -32,10 +32,18 @@
             <%= q.check_box :visible, :class => 'form-control' %>
           </div>
           <%=q.error_span(:visible) %>
-        </div>
+        </div
+        <div class="row">
+          <%= q.link_to_remove "Remove this question" %>
+        </div>>
       </div>
     </div>
   </div>
   <% end %>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <p><%= f.link_to_add "Add question", :questions %></p>
+  </div>
 </div>
 <% end %>
