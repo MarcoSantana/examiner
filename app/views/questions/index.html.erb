@@ -33,7 +33,7 @@
         <td><%= question.visible ?  icon(:'eye-open') : glyph(:'eye-close') %></td>
         <td><%= question.locked ?  glyph(:lock) : glyph(:edit) %></td>
         <td><%= question.position %></td>
-        <td><%= question.content.truncate 50 %></td>
+        <td><%= (question.content.truncate 50).html_safe %></td>
         <td><%= question.value %></td>
         <td><%=l question.created_at %></td>
         <% if(question.question_set_id) %>
@@ -41,7 +41,7 @@
           <td>
             <%= tag_label((content_tag :a, "#{question_set.id}", href: "#question_set_#{question_set.id}", data: {toggle: 'modal'}), :default) %>
           </td>
-          
+
         <% else %>
         <td>No asociated to any question set</td>
         <% end %>

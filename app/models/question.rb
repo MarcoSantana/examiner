@@ -11,6 +11,10 @@ class Question < ActiveRecord::Base
 			id.to_s+" - "+content.truncate(50,{omission: '...'})
 	  end
 
+		def to_s
+		  content.html_safe
+		end
+
 	scope :sorted, lambda { order("questions.position ASC")  }
 	scope :newest_fisrt, lambda { order("questions.created_at DESC") }
 	scope :search, lambda { |query|

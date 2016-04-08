@@ -30,7 +30,7 @@ gem 'bootstrap'
 gem 'rmagick'
 gem 'carrierwave'
 #Wysiwyg editor
-
+gem 'ckeditor', github: 'galetahub/ckeditor'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

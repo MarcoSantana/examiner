@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  mount Ckeditor::Engine => '/ckeditor'
   resources :subjects
   devise_for :users
   #Este es por el curso de Lynda, a veces funciona y a veces no

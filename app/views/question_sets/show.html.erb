@@ -17,12 +17,12 @@
   <dt><strong><%= model_class.human_attribute_name(:position) %>:</strong></dt>
   <dd><%= @question_set.position %></dd>
   <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
-  <dd><%= @question_set.content %></dd>
+  <dd><%= @question_set.to_s %></dd>
 </dl>
 <dl class="dl-horizontal">
   <% @question_set.questions.each  do  |question|  %>
   <dt></dt>
-  <dd><%= question.content %></dd>
+  <dd><%= question.to_s %></dd>
   <dd><%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_question_path(question), :class => 'btn btn-default btn-xs' %></dd>
   <% end %>

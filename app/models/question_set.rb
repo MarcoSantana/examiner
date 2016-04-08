@@ -7,13 +7,14 @@ class QuestionSet < ActiveRecord::Base
 	accepts_nested_attributes_for :questions, :reject_if => :all_blank, :allow_destroy => true
 
 	def to_s
-	  content
+	  content.html_safe
 	end
 
 #This is for the select to be more presentable
 	def truncated_content
 		id.to_s+" - "+content.truncate(50,{omission: '...'})
   end
+
 
 	scope :visible, lambda { where(:visible => true)  }
 	scope :invisible, lambda { where(:visible => false) }
