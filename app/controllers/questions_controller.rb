@@ -43,7 +43,7 @@ class QuestionsController < ApplicationController
 
   def destroy
       question = Question.find(params[:id]).destroy
-      flash[:notice] = "Question '#{question.name}' has been destroyed successfully"
+      flash[:notice] = "Question '#{question.content}' has been destroyed successfully"
       redirect_to(:action => 'index')
   end
 
