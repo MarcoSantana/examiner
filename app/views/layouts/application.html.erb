@@ -26,7 +26,13 @@
 					<li class="active"><a href="#"><%= params[:controller].titleize %> <%= action_name.titleize %></a></li>
 					<li class=""><a href="#">Home</a></li>
 	        <li><a href="#"></a></li>
-					<li><%= link_to "quizzes", quizzes_path %></li>
+					<% Rails.application.eager_load! %>
+					<% controllers = ApplicationController.descendants %>
+					<% controllers.each do |controller| %>
+					  <li>
+							<%= link_to controller.to_s.gsub(/Controller/, '').titleize,   "/"+(controller.to_s.gsub(/Controller/, '').downcase)  %>
+						</li>
+					<% end %>
 
 	      </ul>
 	      <form class="navbar-form navbar-left" role="search">
