@@ -29,6 +29,7 @@ gem 'bootstrap'
 #For image uploading as seen on railscasts 253
 gem 'rmagick'
 gem 'carrierwave'
+gem 'mini_magick'
 #Wysiwyg editor
 gem 'ckeditor', github: 'galetahub/ckeditor'
 # Use jquery as the JavaScript library

@@ -1,37 +1,117 @@
 <%= form_for @question, :html => { :class => "form-horizontal question" } do |f| %>
 
-<% if @question.errors.any? %>
-<div id="error_expl" class="panel panel-danger">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h3>
-  </div>
-  <div class="panel-body">
-    <ul>
-      <% @question.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-</div>
-<% end %>
-<div class="panel-body">
-  <%= render :partial => 'questions/_question_stats', :locals => {:f => f} %> 
-  <%= render :partial => 'questions/_question_set_select', :locals => {:f => f} %>
+  <% if @question.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @question.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
 
+  <div class="form-group">
+    <%= f.label :question_set_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :question_set_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:question_set_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :difficulty, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :difficulty, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:difficulty) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :visible, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :visible, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:visible) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :locked, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :locked, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:locked) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :position, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :position, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:position) %>
+  </div>
   <div class="form-group">
     <%= f.label :content, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_area :content, :class => 'form-control', :rows => 3 %>
+      <%= f.text_field :content, :class => 'form-control' %>
     </div>
     <%=f.error_span(:content) %>
   </div>
-
-<div class="form-group">
-  <div class="col-lg-offset-2 col-lg-10">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-    questions_path, :class => 'btn btn-default' %>
+  <div class="form-group">
+    <%= f.label :value, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :value, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value) %>
   </div>
-</div>
+  <div class="form-group">
+    <div class="container">
+      <% @question.distractors.each do |distractor| %>
+        <%= form_for distractor do |distractor_form| %>
+        <% if distractor.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@distractor.errors.count, "error") %> prohibited this distractor from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @distractor.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <% end %>
+        <%= render :partial => 'distractors/_stat_data_form', :locals => {:f => distractor_form} %>
+        <%= render :partial => 'distractors/_question_select_form', :locals => {:f => distractor_form} %>
+          <div class="form-group">
+            <%= distractor_form.label :content, :class => 'control-label col-lg-2' %>
+            <div class="col-lg-10">
+              <%= distractor_form.cktext_area :content, :class => 'form-control', :rows => 3, :id => "distractor_content_#{distractor_form}" %>
+            </div>
+            <%=distractor_form.error_span(:content) %>
+          </div>
+
+
+          <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+              <%= distractor_form.submit nil, :class => 'btn btn-primary' %>
+              <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+              distractors_path, :class => 'btn btn-default' %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                questions_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
 
 <% end %>

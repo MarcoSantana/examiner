@@ -28,7 +28,7 @@
         <td><%= distractor.difficulty %></td>
         <td><%= distractor.visible %></td>
         <td><%= distractor.locked %></td>
-        <td><%= distractor.content %></td>
+        <td><%= distractor.content.html_safe %></td>
         <td><%= distractor.right %></td>
         <td><%=l distractor.created_at %></td>
         <td>

@@ -17,7 +17,7 @@
   <dt><strong><%= model_class.human_attribute_name(:locked) %>:</strong></dt>
   <dd><%= @distractor.locked %></dd>
   <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
-  <dd><%= @distractor.content %></dd>
+  <dd><%= (@distractor.content).html_safe %></dd>
   <dt><strong><%= model_class.human_attribute_name(:right) %>:</strong></dt>
   <dd><%= @distractor.right %></dd>
 </dl>

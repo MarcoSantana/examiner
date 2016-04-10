@@ -15,6 +15,8 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(questions_params)
+    @distractors = @questions.distractors.build
+    1.times { @questions.distractors.build }
     if @question.save
       flash[:notice] = "Question created successfully"
       redirect_to(:action => 'index')
