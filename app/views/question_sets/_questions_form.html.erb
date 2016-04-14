@@ -9,6 +9,8 @@
         <% question.distractors.each do |distractor| %>
           <%= q.fields_for :distractors, distractor do |d| %>
             <%= d.cktext_area :content, :id => distractor %>
+            <%= d.link_to_remove "Remove this distractor", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+            :class => 'btn btn-xs btn-danger'  %>
           <% end %>
         <% end %>
       </div>

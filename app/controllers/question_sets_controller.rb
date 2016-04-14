@@ -11,11 +11,16 @@ class QuestionSetsController < ApplicationController
 
   def new
     @question_set = QuestionSet.new()
-    @questions = @question_set.questions.build
-    1.times { @question_set.questions.build }
+    # @questions = @question_set.questions.build
+    @question_set.questions.build
+    @question_set.questions.each do |question|
+      question.distractors.build
+    end
+
+
   end
   # POST /question_sets
-  # POST /question_sets.json
+  # POST /question_setsjson
   def create
     @question_set = QuestionSet.new(question_set_params)
     if @question_set.save
