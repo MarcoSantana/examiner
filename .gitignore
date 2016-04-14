@@ -11,3 +11,11 @@
 /log/*
 !/log/.keep
 /tmp
+#Ignore al ckeditor folders
+/ckeditor/attachment_files/*
+/ckeditor/attachment_files/*
+/ckeditor/attachment_files/*
+/ckeditor/pictures/*
+/ckeditor/pictures/*
+/ckeditor/pictures/*
+/ckeditor/attachment_files/*

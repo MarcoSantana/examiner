@@ -59,7 +59,7 @@ class QuestionSetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_set_params
-      params.require(:question_set).permit(:subject_id, :user_id, :difficulty, :visible, :locked, :position, :content, :questions_attributes => [:id, :difficulty, :visible, :locked, :position,:content, :value, :_destroy])
+      params.require(:question_set).permit(:subject_id, :user_id, :difficulty, :visible, :locked, :position, :content, :questions_attributes => [:id, :difficulty, :visible, :locked, :position,:content, :value, :_destroy, :distractors_attributes => [:id, :question_id, :option, :difficulty, :visible, :locked, :content, :right, :_destroy]])
     end
 
 end
